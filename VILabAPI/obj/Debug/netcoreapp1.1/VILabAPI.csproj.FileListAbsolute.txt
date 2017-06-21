@@ -1,8 +1,0 @@
-D:\Sources\VILab\VILabAPI\bin\Debug\netcoreapp1.1\VILabAPI.deps.json
-D:\Sources\VILab\VILabAPI\bin\Debug\netcoreapp1.1\VILabAPI.runtimeconfig.json
-D:\Sources\VILab\VILabAPI\bin\Debug\netcoreapp1.1\VILabAPI.runtimeconfig.dev.json
-D:\Sources\VILab\VILabAPI\bin\Debug\netcoreapp1.1\VILabAPI.dll
-D:\Sources\VILab\VILabAPI\bin\Debug\netcoreapp1.1\VILabAPI.pdb
-D:\Sources\VILab\VILabAPI\obj\Debug\netcoreapp1.1\VILabAPI.AssemblyInfo.cs
-D:\Sources\VILab\VILabAPI\obj\Debug\netcoreapp1.1\VILabAPI.dll
-D:\Sources\VILab\VILabAPI\obj\Debug\netcoreapp1.1\VILabAPI.pdb

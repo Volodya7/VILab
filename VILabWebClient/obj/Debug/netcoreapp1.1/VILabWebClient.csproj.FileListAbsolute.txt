@@ -1,9 +1,0 @@
-D:\Sources\VILab\VILabWebClient\bin\Debug\netcoreapp1.1\VILabWebClient.deps.json
-D:\Sources\VILab\VILabWebClient\bin\Debug\netcoreapp1.1\VILabWebClient.runtimeconfig.json
-D:\Sources\VILab\VILabWebClient\bin\Debug\netcoreapp1.1\VILabWebClient.runtimeconfig.dev.json
-D:\Sources\VILab\VILabWebClient\bin\Debug\netcoreapp1.1\VILabWebClient.dll
-D:\Sources\VILab\VILabWebClient\bin\Debug\netcoreapp1.1\VILabWebClient.pdb
-D:\Sources\VILab\VILabWebClient\obj\Debug\netcoreapp1.1\VILabWebClient.csprojResolveAssemblyReference.cache
-D:\Sources\VILab\VILabWebClient\obj\Debug\netcoreapp1.1\VILabWebClient.AssemblyInfo.cs
-D:\Sources\VILab\VILabWebClient\obj\Debug\netcoreapp1.1\VILabWebClient.dll
-D:\Sources\VILab\VILabWebClient\obj\Debug\netcoreapp1.1\VILabWebClient.pdb
