@@ -31,7 +31,7 @@ namespace VILab.API
             }
             else
             {
-                app.UseExceptionHandler();
+                app.UseExceptionHandler();fgh
             }
 
             app.UseStatusCodePages();
