@@ -4,29 +4,58 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using VILab.API.Models.Create;
 using VILab.API.Models.Retrieve;
 using VILab.API.Models.Update;
 using VILab.API.Repositories;
+using VILab.API.Services;
 
 namespace VILab.API.Controllers
 {
     [Route("api/cities")]
-    public class PointsOfInterestController:Controller
+    public class PointsOfInterestController : Controller
     {
+
+        #region Fields
+
+        private ILogger<PointsOfInterestController> _logger;
+        private IMailService _mailService;
+
+        #endregion
+
+        #region Constructors
+
+        public PointsOfInterestController(ILogger<PointsOfInterestController> logger,IMailService mailService)
+        {
+            _logger = logger;
+            _mailService = mailService;
+        }
+
+        #endregion
+
         [HttpGet("{cityId}/pointsofinterest")]
         public IActionResult GetPointsOfInterest(int cityId)
         {
-            var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
-            if (city == null)
+            try
             {
-                return NotFound();
-            }
+                var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
+                if (city == null)
+                {
+                    _logger.LogInformation($"city with id {cityId} not found");
+                    return NotFound();
+                }
 
-            return Ok(city.PointsOfInterest);
+                return Ok(city.PointsOfInterest);
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical($"Exception while getting points of interest for city with id {cityId}.",e);
+                return StatusCode(500, "A problem happened while handling your request");
+            }
         }
 
-        [HttpGet("{cityId}/pointsofinterest/{id}",Name = "GetPointOfInterest")]
+        [HttpGet("{cityId}/pointsofinterest/{id}", Name = "GetPointOfInterest")]
         public IActionResult GetPointOfInterest(int cityId, int id)
         {
             var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
@@ -46,7 +75,7 @@ namespace VILab.API.Controllers
         }
 
         [HttpPost("{cityId}/pointsofinterest")]
-        public IActionResult CreatePointOfInterest(int cityId,[FromBody]PointOfInterestForCreationDto pointOfInterest)
+        public IActionResult CreatePointOfInterest(int cityId, [FromBody]PointOfInterestForCreationDto pointOfInterest)
         {
             if (pointOfInterest == null)
             {
@@ -68,7 +97,7 @@ namespace VILab.API.Controllers
             var maxPointOfInterestId = InMemoryDataSource.Current.Cities.SelectMany(x => x.PointsOfInterest)
                 .Max(x => x.Id);
 
-            var finalPointOfInterest=new PointOfInterestDto()
+            var finalPointOfInterest = new PointOfInterestDto()
             {
                 Id = ++maxPointOfInterestId,
                 Name = pointOfInterest.Name,
@@ -77,7 +106,7 @@ namespace VILab.API.Controllers
 
             city.PointsOfInterest.Add(finalPointOfInterest);
 
-            return CreatedAtRoute("GetPointOfInterest", new {cityId = cityId, id = finalPointOfInterest.Id},
+            return CreatedAtRoute("GetPointOfInterest", new { cityId = cityId, id = finalPointOfInterest.Id },
                 finalPointOfInterest);
         }
 
@@ -140,7 +169,7 @@ namespace VILab.API.Controllers
                 Description = pointOfInterestFromDataSource.Description
             };
 
-            patchDoc.ApplyTo(pointOfInterestToPatch,ModelState);
+            patchDoc.ApplyTo(pointOfInterestToPatch, ModelState);
 
             if (!ModelState.IsValid)
             {
@@ -177,6 +206,8 @@ namespace VILab.API.Controllers
             }
 
             city.PointsOfInterest.Remove(pointOfInterestFromDataSource);
+
+            _mailService.Send("POI deleted",$"POI id: {id} for city with id: {cityId}");
 
             return NoContent();
         }
