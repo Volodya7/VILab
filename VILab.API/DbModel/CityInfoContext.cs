@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using VILab.API.Entities;
 
-namespace VILab.API.DbContext
+namespace VILab.API.DbModel
 {
-    public class CityInfoContext: Microsoft.EntityFrameworkCore.DbContext
+    public class CityInfoContext: DbContext
     {
 
         public CityInfoContext(DbContextOptions<CityInfoContext> options) : base(options)
