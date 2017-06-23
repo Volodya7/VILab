@@ -27,7 +27,7 @@ namespace VILab.API
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();ghjfjg
             }
             else
             {
