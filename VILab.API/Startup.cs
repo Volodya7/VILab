@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NLog.Extensions.Logging;
+using VILab.API.DbContext;
 using VILab.API.Services;
 
 namespace VILab.API
@@ -34,6 +36,9 @@ namespace VILab.API
         {
             services.AddMvc();
             services.AddTransient<IMailService, LocalMailService>();
+
+            var connectionString = "Host=Localhost;Port=5432;Database=VILabDb;User Id='Volodya';Password='Volodya777';";
+            services.AddDbContext<CityInfoContext>(o=>o.UseNpgsql(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
