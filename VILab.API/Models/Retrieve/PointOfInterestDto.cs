@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VILab.API.Models
+namespace VILab.API.Models.Retrieve
 {
     public class PointOfInterestDto
     {
