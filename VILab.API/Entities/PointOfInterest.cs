@@ -21,6 +21,10 @@ namespace VILab.API.Entities
         public string Description { get; set; }
 
         [ForeignKey("CityId")]
+        public City City { get; set; }
+
         public int CityId { get; set; }
+
+
     }
 }
