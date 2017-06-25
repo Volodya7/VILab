@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using VILab.API.Entities;
 using VILab.API.Models.Create;
 using VILab.API.Models.Retrieve;
 using VILab.API.Models.Update;
@@ -21,15 +23,17 @@ namespace VILab.API.Controllers
 
         private ILogger<PointsOfInterestController> _logger;
         private IMailService _mailService;
+        private ICityInfoRepository _cityInfoRepository;
 
         #endregion
 
         #region Constructors
 
-        public PointsOfInterestController(ILogger<PointsOfInterestController> logger,IMailService mailService)
+        public PointsOfInterestController(ILogger<PointsOfInterestController> logger, IMailService mailService, ICityInfoRepository cityInfoRepository)
         {
             _logger = logger;
             _mailService = mailService;
+            _cityInfoRepository = cityInfoRepository;
         }
 
         #endregion
@@ -39,18 +43,20 @@ namespace VILab.API.Controllers
         {
             try
             {
-                var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
-                if (city == null)
+                if (!_cityInfoRepository.CityExists(cityId))
                 {
                     _logger.LogInformation($"city with id {cityId} not found");
                     return NotFound();
                 }
 
-                return Ok(city.PointsOfInterest);
+                var pointsOfInterestForCity = _cityInfoRepository.GetPointsOfInterest(cityId);
+                var pointsOfInterestResult = Mapper.Map<IEnumerable<PointOfInterestDto>>(pointsOfInterestForCity);
+
+                return Ok(pointsOfInterestResult);
             }
             catch (Exception e)
             {
-                _logger.LogCritical($"Exception while getting points of interest for city with id {cityId}.",e);
+                _logger.LogCritical($"Exception while getting points of interest for city with id {cityId}.", e);
                 return StatusCode(500, "A problem happened while handling your request");
             }
         }
@@ -58,20 +64,21 @@ namespace VILab.API.Controllers
         [HttpGet("{cityId}/pointsofinterest/{id}", Name = "GetPointOfInterest")]
         public IActionResult GetPointOfInterest(int cityId, int id)
         {
-            var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
-            if (city == null)
+            if (!_cityInfoRepository.CityExists(cityId))
             {
                 return NotFound();
             }
 
-            var pointOfInterest = city.PointsOfInterest.FirstOrDefault(x => x.Id == id);
+            var pointOfInterest = _cityInfoRepository.GetPointOfInterestForCity(cityId, id);
 
             if (pointOfInterest == null)
             {
                 return NotFound();
             }
 
-            return Ok(pointOfInterest);
+            var result = Mapper.Map<PointOfInterestDto>(pointOfInterest);
+
+            return Ok(result);
         }
 
         [HttpPost("{cityId}/pointsofinterest")]
@@ -87,27 +94,24 @@ namespace VILab.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
-            if (city == null)
+            if (!_cityInfoRepository.CityExists(cityId))
             {
                 return NotFound();
             }
 
-            // to be improved
-            var maxPointOfInterestId = InMemoryDataSource.Current.Cities.SelectMany(x => x.PointsOfInterest)
-                .Max(x => x.Id);
+            var finalPointOfInterest = Mapper.Map<PointOfInterest>(pointOfInterest);
 
-            var finalPointOfInterest = new PointOfInterestDto()
+            _cityInfoRepository.AddPointOfInterestForCity(cityId, finalPointOfInterest);
+
+            if (!_cityInfoRepository.Save())
             {
-                Id = ++maxPointOfInterestId,
-                Name = pointOfInterest.Name,
-                Description = pointOfInterest.Description
-            };
+                return StatusCode(500, "A problem happened while handling your request");
+            }
 
-            city.PointsOfInterest.Add(finalPointOfInterest);
+            var createdPointOfInterestToReturn = Mapper.Map<PointOfInterestDto>(finalPointOfInterest);
 
-            return CreatedAtRoute("GetPointOfInterest", new { cityId = cityId, id = finalPointOfInterest.Id },
-                finalPointOfInterest);
+            return CreatedAtRoute("GetPointOfInterest", new { cityId = cityId, id = createdPointOfInterestToReturn.Id },
+                createdPointOfInterestToReturn);
         }
 
         [HttpPut("{cityId}/pointsofinterest/{id}")]
@@ -124,20 +128,23 @@ namespace VILab.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
-            if (city == null)
+            if (!_cityInfoRepository.CityExists(cityId))
             {
                 return NotFound();
             }
 
-            var pointOfInterestFromDataSource = city.PointsOfInterest.FirstOrDefault(x => x.Id == id);
-            if (pointOfInterestFromDataSource == null)
+            var pointOfInterestEntity = _cityInfoRepository.GetPointOfInterestForCity(cityId, id);
+            if (pointOfInterestEntity == null)
             {
                 return NotFound();
             }
 
-            pointOfInterestFromDataSource.Name = pointOfInterest.Name;
-            pointOfInterestFromDataSource.Description = pointOfInterest.Description;
+            Mapper.Map(pointOfInterest, pointOfInterestEntity);
+
+            if (!_cityInfoRepository.Save())
+            {
+                return StatusCode(500, "A problem happened while handling your request");
+            }
 
             return NoContent();
         }
@@ -148,26 +155,21 @@ namespace VILab.API.Controllers
         {
             if (patchDoc == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
-            if (city == null)
+            if (!_cityInfoRepository.CityExists(cityId))
             {
                 return NotFound();
             }
 
-            var pointOfInterestFromDataSource = city.PointsOfInterest.FirstOrDefault(x => x.Id == id);
-            if (pointOfInterestFromDataSource == null)
+            var pointOfInterestEntity = _cityInfoRepository.GetPointOfInterestForCity(cityId, id);
+            if (pointOfInterestEntity == null)
             {
                 return NotFound();
             }
 
-            var pointOfInterestToPatch = new PointOfInterestForUpdateDto()
-            {
-                Name = pointOfInterestFromDataSource.Name,
-                Description = pointOfInterestFromDataSource.Description
-            };
+            var pointOfInterestToPatch = Mapper.Map<PointOfInterestForUpdateDto>(pointOfInterestEntity);
 
             patchDoc.ApplyTo(pointOfInterestToPatch, ModelState);
 
@@ -184,8 +186,13 @@ namespace VILab.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            pointOfInterestFromDataSource.Name = pointOfInterestToPatch.Name;
-            pointOfInterestFromDataSource.Description = pointOfInterestToPatch.Name;
+            Mapper.Map(pointOfInterestToPatch, pointOfInterestEntity);
+
+            if (!_cityInfoRepository.Save())
+            {
+                return StatusCode(500, "A problem happened while handling your request");
+            }
+
 
             return NoContent();
         }
@@ -193,21 +200,26 @@ namespace VILab.API.Controllers
         [HttpDelete("{cityId}/pointsofinterest/{id}")]
         public IActionResult DeletePointOfInterest(int cityId, int id)
         {
-            var city = InMemoryDataSource.Current.Cities.FirstOrDefault(x => x.Id == cityId);
-            if (city == null)
+
+            if (!_cityInfoRepository.CityExists(cityId))
             {
                 return NotFound();
             }
 
-            var pointOfInterestFromDataSource = city.PointsOfInterest.FirstOrDefault(x => x.Id == id);
-            if (pointOfInterestFromDataSource == null)
+            var pointOfInterestEntity = _cityInfoRepository.GetPointOfInterestForCity(cityId, id);
+            if (pointOfInterestEntity == null)
             {
                 return NotFound();
             }
 
-            city.PointsOfInterest.Remove(pointOfInterestFromDataSource);
+            _cityInfoRepository.DeletePointOfinterest(pointOfInterestEntity);
 
-            _mailService.Send("POI deleted",$"POI id: {id} for city with id: {cityId}");
+            if (!_cityInfoRepository.Save())
+            {
+                return StatusCode(500, "A problem happened while handling your request");
+            }
+
+            _mailService.Send("POI deleted", $"POI id: {pointOfInterestEntity.Id} for city with id: {cityId}");
 
             return NoContent();
         }
@@ -215,3 +227,4 @@ namespace VILab.API.Controllers
 
     }
 }
+

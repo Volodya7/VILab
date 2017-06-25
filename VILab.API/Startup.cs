@@ -12,6 +12,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NLog.Extensions.Logging;
 using VILab.API.DbModel;
+using VILab.API.Entities;
+using VILab.API.Models.Create;
+using VILab.API.Models.Retrieve;
+using VILab.API.Models.Update;
 using VILab.API.Services;
 
 namespace VILab.API
@@ -42,6 +46,7 @@ namespace VILab.API
             services.AddDbContext<CityInfoContext>(o => o.UseNpgsql(connectionString, b => b.MigrationsAssembly("VILab.API")));
 
             services.AddMvc();
+            services.AddScoped<ICityInfoRepository, CityInfoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +67,17 @@ namespace VILab.API
             cityInfoContext.EnsureSeedDataForContext();
 
             app.UseStatusCodePages();
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<City, CityWithoutPointsOfInterestDto>();
+                cfg.CreateMap<City, CityDto>();
+                cfg.CreateMap<PointOfInterest, PointOfInterestDto>();
+                cfg.CreateMap<PointOfInterestForCreationDto, PointOfInterest>();
+                cfg.CreateMap<PointOfInterestForUpdateDto, PointOfInterest>();
+                cfg.CreateMap<PointOfInterest, PointOfInterestForUpdateDto>();
+            });
+
             app.UseMvc();
         }
     }
