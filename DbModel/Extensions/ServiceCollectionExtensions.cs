@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using VILab.API.DbModel;
 
 namespace DbModel.Extensions
 {
@@ -11,7 +7,7 @@ namespace DbModel.Extensions
     {
         public static void AddEntityFramework(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<CityInfoContext>(options =>
+            services.AddDbContext<ViLabContext>(options =>
                 options.UseNpgsql(connectionString));
         }
     }

@@ -1,18 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using VILab.API.DbModel;
-using VILab.API.Entities;
+using DbModel.Entities;
 
 namespace DbModel.Repositories
 {
     public class CityInfoRepository:ICityInfoRepository
     {
-        private CityInfoContext _context;
+        private ViLabContext _context;
 
-        public CityInfoRepository(CityInfoContext context)
+        public CityInfoRepository(ViLabContext context)
         {
             _context = context;
         }

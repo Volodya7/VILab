@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
+using DbModel.Entities;
 using Microsoft.EntityFrameworkCore;
-using VILab.API.Entities;
 
-namespace VILab.API.DbModel
+namespace DbModel
 {
-    public class CityInfoContext: DbContext
+    public class ViLabContext: DbContext
     {
 
-        public CityInfoContext(DbContextOptions<CityInfoContext> options) : base(options)
+        public ViLabContext(DbContextOptions<ViLabContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

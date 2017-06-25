@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DbModel.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using VILab.API.Models.Retrieve;
+using System.Collections.Generic;
+using VILab.API.Dto.Retrieve;
 
 namespace VILab.API.Controllers
 {

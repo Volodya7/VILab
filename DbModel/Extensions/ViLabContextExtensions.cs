@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using VILab.API.DbModel;
-using VILab.API.Entities;
+using DbModel.Entities;
 
 namespace DbModel.Extensions
 {
-    public static class CityInfoContextExtensions
+    public static class ViLabContextExtensions
     {
-        public static void EnsureSeedDataForContext(this CityInfoContext context)
+        public static void EnsureSeedDataForContext(this ViLabContext context)
         {
             if (context.Cities.Any())
             {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Common.MailService
+﻿namespace Common.MailService
 {
     public class LocalMailService:IMailService
     {

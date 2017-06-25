@@ -1,13 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using VILab.API.DbModel;
 
 namespace DbModel.Migrations
 {
-    [DbContext(typeof(CityInfoContext))]
+    [DbContext(typeof(ViLabContext))]
     partial class CityInfoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

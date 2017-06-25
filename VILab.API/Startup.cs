@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Common;
-using Common.MailService;
+﻿using Common.MailService;
+using DbModel;
+using DbModel.Entities;
 using DbModel.Extensions;
 using DbModel.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using NLog.Extensions.Logging;
-using VILab.API.DbModel;
-using VILab.API.Entities;
-using VILab.API.Models.Create;
-using VILab.API.Models.Retrieve;
-using VILab.API.Models.Update;
+using VILab.API.Dto.Create;
+using VILab.API.Dto.Retrieve;
+using VILab.API.Dto.Update;
 
 namespace VILab.API
 {
@@ -38,23 +30,20 @@ namespace VILab.API
             Configuration = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
            
             services.AddTransient<IMailService, LocalMailService>();
 
             var connectionString = Startup.Configuration["connectionStrings:VILabDBConnectionString"];
-           // services.AddDbContext<CityInfoContext>(o => o.UseNpgsql(connectionString, b => b.MigrationsAssembly("VILab.API")));
            services.AddEntityFramework(connectionString);
 
             services.AddMvc();
             services.AddScoped<ICityInfoRepository, CityInfoRepository>();
         }
+        
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,CityInfoContext cityInfoContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,ViLabContext viLabContext)
         {
             loggerFactory.AddConsole();
             loggerFactory.AddNLog();
@@ -68,7 +57,7 @@ namespace VILab.API
                 app.UseExceptionHandler();
             }
 
-            cityInfoContext.EnsureSeedDataForContext();
+            viLabContext.EnsureSeedDataForContext();
 
             app.UseStatusCodePages();
 

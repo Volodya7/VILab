@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Threading.Tasks;
-using VILab.API.Models;
+﻿using System.Collections.Generic;
 
-namespace VILab.API.Models.Retrieve
+namespace VILab.API.Dto.Retrieve
 {
     public class CityDto
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VILab.API.Entities;
+using DbModel.Entities;
 
 namespace DbModel.Repositories
 {
