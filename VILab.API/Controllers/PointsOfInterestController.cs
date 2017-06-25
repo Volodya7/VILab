@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.MailService;
+using DbModel.Repositories;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,8 +12,6 @@ using VILab.API.Entities;
 using VILab.API.Models.Create;
 using VILab.API.Models.Retrieve;
 using VILab.API.Models.Update;
-using VILab.API.Repositories;
-using VILab.API.Services;
 
 namespace VILab.API.Controllers
 {

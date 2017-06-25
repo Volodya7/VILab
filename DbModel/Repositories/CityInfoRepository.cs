@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using VILab.API.DbModel;
 using VILab.API.Entities;
 
-namespace VILab.API.Services
+namespace DbModel.Repositories
 {
     public class CityInfoRepository:ICityInfoRepository
     {

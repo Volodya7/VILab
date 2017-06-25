@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VILab.API.DbModel;
 using VILab.API.Entities;
-using VILab.API.Models.Retrieve;
 
-namespace VILab.API.DbModel
+namespace DbModel.Extensions
 {
     public static class CityInfoContextExtensions
     {

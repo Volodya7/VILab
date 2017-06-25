@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DbModel.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using VILab.API.Models.Retrieve;
-using VILab.API.Repositories;
-using VILab.API.Services;
 
 namespace VILab.API.Controllers
 {

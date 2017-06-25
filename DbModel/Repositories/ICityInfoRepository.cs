@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VILab.API.Entities;
 
-namespace VILab.API.Services
+namespace DbModel.Repositories
 {
     public interface ICityInfoRepository
     {

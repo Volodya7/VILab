@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common;
+using Common.MailService;
+using DbModel.Extensions;
+using DbModel.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +20,6 @@ using VILab.API.Entities;
 using VILab.API.Models.Create;
 using VILab.API.Models.Retrieve;
 using VILab.API.Models.Update;
-using VILab.API.Services;
 
 namespace VILab.API
 {
@@ -43,7 +46,8 @@ namespace VILab.API
             services.AddTransient<IMailService, LocalMailService>();
 
             var connectionString = Startup.Configuration["connectionStrings:VILabDBConnectionString"];
-            services.AddDbContext<CityInfoContext>(o => o.UseNpgsql(connectionString, b => b.MigrationsAssembly("VILab.API")));
+           // services.AddDbContext<CityInfoContext>(o => o.UseNpgsql(connectionString, b => b.MigrationsAssembly("VILab.API")));
+           services.AddEntityFramework(connectionString);
 
             services.AddMvc();
             services.AddScoped<ICityInfoRepository, CityInfoRepository>();

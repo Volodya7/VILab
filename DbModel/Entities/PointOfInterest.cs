@@ -24,7 +24,5 @@ namespace VILab.API.Entities
         public City City { get; set; }
 
         public int CityId { get; set; }
-
-
     }
 }

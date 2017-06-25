@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using VILab.API.DbModel;
 
-namespace VILab.API.Migrations
+namespace DbModel.Migrations
 {
     [DbContext(typeof(CityInfoContext))]
     partial class CityInfoContextModelSnapshot : ModelSnapshot
