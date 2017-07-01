@@ -15,5 +15,7 @@ namespace DbModel
 
         public DbSet<City> Cities { get; set; }
         public DbSet<PointOfInterest> PointsOfInterests { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
     }
 }

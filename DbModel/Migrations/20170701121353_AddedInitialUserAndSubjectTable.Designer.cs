@@ -8,59 +8,14 @@ using DbModel;
 namespace DbModel.Migrations
 {
     [DbContext(typeof(ViLabContext))]
-    partial class CityInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20170701121353_AddedInitialUserAndSubjectTable")]
+    partial class AddedInitialUserAndSubjectTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "1.1.2");
-
-            modelBuilder.Entity("DbModel.Entities.Case", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<byte[]>("Img")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<int>("UnitId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UnitId");
-
-                    b.ToTable("Case");
-                });
-
-            modelBuilder.Entity("DbModel.Entities.CaseImg", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
-
-                    b.Property<int>("CaseId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<byte[]>("Img")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseId");
-
-                    b.ToTable("CaseImg");
-                });
 
             modelBuilder.Entity("DbModel.Entities.City", b =>
                 {
@@ -121,29 +76,6 @@ namespace DbModel.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("DbModel.Entities.Unit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<byte[]>("Img")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<int>("SubjectId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Unit");
-                });
-
             modelBuilder.Entity("DbModel.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -169,35 +101,11 @@ namespace DbModel.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DbModel.Entities.Case", b =>
-                {
-                    b.HasOne("DbModel.Entities.Unit", "Unit")
-                        .WithMany("Cases")
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DbModel.Entities.CaseImg", b =>
-                {
-                    b.HasOne("DbModel.Entities.Case", "Case")
-                        .WithMany("CaseImgs")
-                        .HasForeignKey("CaseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("DbModel.Entities.PointOfInterest", b =>
                 {
                     b.HasOne("DbModel.Entities.City", "City")
                         .WithMany("PointsOfInterest")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DbModel.Entities.Unit", b =>
-                {
-                    b.HasOne("DbModel.Entities.Subject", "Subject")
-                        .WithMany("Units")
-                        .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }
