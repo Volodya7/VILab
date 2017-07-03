@@ -32,7 +32,6 @@ namespace VILab.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-           
             services.AddTransient<IMailService, LocalMailService>();
 
             var connectionString = Startup.Configuration["connectionStrings:VILabDBConnectionString"];

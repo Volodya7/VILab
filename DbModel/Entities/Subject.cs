@@ -17,7 +17,7 @@ namespace DbModel.Entities
         public string Name { get; set; }
 
         [Required]
-        public byte[] Img { get; set; }
+        public string ImgUrl { get; set; }
 
         public string Description { get; set; }
 
