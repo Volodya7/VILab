@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Amazon.S3;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace VILab.API.Controllers
 {
+    [EnableCors("SiteCorsPolicy")]
     [Route("api/cases")]
     public class CasesController:Controller
     {
