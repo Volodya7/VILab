@@ -1,4 +1,9 @@
-﻿using Common.MailService;
+﻿using Amazon;
+using Amazon.Runtime;
+using Amazon.Runtime.CredentialManagement;
+using Amazon.Runtime.SharedInterfaces;
+using Amazon.S3;
+using Common.MailService;
 using DbModel;
 using DbModel.Entities;
 using DbModel.Extensions;
@@ -35,14 +40,17 @@ namespace VILab.API
             services.AddTransient<IMailService, LocalMailService>();
 
             var connectionString = Startup.Configuration["connectionStrings:VILabDBConnectionString"];
-           services.AddEntityFramework(connectionString);
+            services.AddEntityFramework(connectionString);
 
             services.AddMvc();
             services.AddScoped<ICityInfoRepository, CityInfoRepository>();
-        }
-        
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,ViLabContext viLabContext)
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonS3>();
+        }
+
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ViLabContext viLabContext)
         {
             loggerFactory.AddConsole();
             loggerFactory.AddNLog();
@@ -70,7 +78,21 @@ namespace VILab.API
                 cfg.CreateMap<PointOfInterest, PointOfInterestForUpdateDto>();
             });
 
+            //InitAwsCredetialsFile();
+
             app.UseMvc();
+        }
+
+        private void InitAwsCredetialsFile()
+        {
+            var options = new CredentialProfileOptions()
+            {
+                AccessKey = "",
+                SecretKey = ""
+            };
+            var profile = new CredentialProfile("vilab_profile", options) { Region = RegionEndpoint.EUCentral1 };
+            var sharedFile = new SharedCredentialsFile();
+            sharedFile.RegisterProfile(profile);
         }
     }
 }
