@@ -18,6 +18,7 @@ using NLog.Extensions.Logging;
 using VILab.API.Dto.Create;
 using VILab.API.Dto.Retrieve;
 using VILab.API.Dto.Update;
+using VILab.API.Services.S3Service;
 
 namespace VILab.API
 {
@@ -45,6 +46,7 @@ namespace VILab.API
 
             services.AddMvc();
             services.AddScoped<ICityInfoRepository, CityInfoRepository>();
+            services.AddScoped<IS3Service, S3Service>();
 
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
             services.AddAWSService<IAmazonS3>();

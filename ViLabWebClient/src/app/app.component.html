@@ -20,3 +20,6 @@
 
 <h1>Application says what?</h1>
 {{apiValues | json}}
+<image-upload (onFileUploadFinish)="imageUploaded($event)"></image-upload>
+
+<input type="button" class="btn btn-default" (click)="save()" value="Save this shit"/>

@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { ImageUploadModule } from 'angular2-image-upload';
+import { HttpClient123 } from 'app/services/upload.service';
 
 @NgModule({
     declarations: [
@@ -12,9 +13,10 @@ import { HttpModule } from '@angular/http';
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule
+      HttpModule,
+        ImageUploadModule.forRoot()
     ],
-    providers: [],
+    providers: [HttpClient123],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

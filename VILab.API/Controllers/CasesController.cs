@@ -1,30 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Amazon.S3;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VILab.API.Services.S3Service;
 
 namespace VILab.API.Controllers
 {
     [EnableCors("SiteCorsPolicy")]
     [Route("api/cases")]
-    public class CasesController:Controller
+    public class CasesController : Controller
     {
-        private IAmazonS3 _s3Client;
+        private IHostingEnvironment _env;
+        private IS3Service _s3Service;
 
-        public CasesController(IAmazonS3 s3Client)
+        public CasesController(IHostingEnvironment env, IS3Service s3Service)
         {
-            _s3Client = s3Client;
+            _env = env;
+            _s3Service = s3Service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCases()
+        public IActionResult GetCases()
         {
-            var list =await _s3Client.ListBucketsAsync();
+            return Ok();
+        }
 
-            return Ok(list);
+        [HttpPost]
+        public IActionResult CreateCase()
+        {
+            var files = Request.Form.Files;
+            foreach (var file in files)
+            {
+                var response = _s3Service.UploadFile(file);
+            }
+
+            return Ok();
         }
     }
 }
