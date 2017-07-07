@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
-import { HttpClient123 } from 'app/services/upload.service';
+import { FormsHttpClient } from 'app/services/upload.service';
+import {Case} from 'app/models/case';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,11 @@ import { HttpClient123 } from 'app/services/upload.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private _httpService: Http, private _httpClient: HttpClient123) { }
+  constructor(private _httpService: Http, private _httpClient: FormsHttpClient) { }
 
   apiValues: object;
   files: File[] = [];
+  model=new Case();
 
   ngOnInit() {
 
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   save() {
-    this._httpClient.postWithFile("", null, this.files).then(result => {
+    this._httpClient.postWithFile("", this.model, this.files).then(result => {
       console.log(result);
     });
   }

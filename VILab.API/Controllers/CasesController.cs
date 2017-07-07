@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VILab.API.Dto.Create;
 using VILab.API.Services.S3Service;
 
 namespace VILab.API.Controllers
@@ -33,7 +34,7 @@ namespace VILab.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCase()
+        public IActionResult CreateCase(CaseForCreationDto caseForCreationDto)
         {
             var files = Request.Form.Files;
             foreach (var file in files)

@@ -4,7 +4,7 @@ import { Http, Headers } from "@angular/http";
 declare var $: any;
 
 @Injectable()
-export class HttpClient123 {
+export class FormsHttpClient {
   requestUrl: string;
   responseData: any;
   handleError: any;
@@ -21,7 +21,7 @@ export class HttpClient123 {
     //formData.append('files', files[0], files[0].name);
     // For multiple files
      for (let i = 0; i < files.length; i++) {
-         formData.append(`files[]`, files[i], files[i].name);
+         formData.append(`Files`, files[i], files[i].name);
      }
 
     if (postData !== "" && postData !== undefined && postData !== null) {
