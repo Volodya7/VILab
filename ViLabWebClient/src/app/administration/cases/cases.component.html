@@ -1,0 +1,23 @@
+﻿<div class="row">
+  <div class="col-md-5 col-md-offset-2">
+    <label style="margin-top: 20px; margin-bottom: 20px; font-size: 25px;font-weight: bold">ADD CASE FORM</label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5 col-md-offset-2">
+    <form>
+      <div class="form-group">
+        <label for="nameInput">Name:</label>
+        <input class="form-control" type="text" name="nameInput" [(ngModel)]="model.Name" />
+      </div>
+      <div class="form-group">
+        <label for="descriptionInput">Description:</label>
+        <input class="form-control" type="text" name="descriptionInput" [(ngModel)]="model.Description" />
+      </div>
+      <div class="form-group">
+        <image-upload (onFileUploadFinish)="imageUploaded($event)"></image-upload>
+      </div>
+      <input type="button" class="btn btn-primary" (click)="save()" value="Save" />
+    </form>
+  </div>
+</div>
