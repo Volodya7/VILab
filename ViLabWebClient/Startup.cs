@@ -28,6 +28,7 @@ namespace ViLabWebClient
       app.UseMvc(routes =>
           {
             routes.MapRoute("default", "{controller=App}/{action=Index}/{id?}");
+            routes.MapRoute("Not found", "{*url}", new {controller = "App", action = "Index"});
           });
 
     }

@@ -13,28 +13,10 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 
 /***/ }),
 
-/***/ "../../../../../src/app/administration/cases/cases.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ "../../../../../src/app/administration/cases/cases.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-5 col-md-offset-2\">\r\n    <label style=\"margin-top: 20px; margin-bottom: 20px; font-size: 25px;font-weight: bold\">ADD CASE FORM</label>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-5 col-md-offset-2\">\r\n    <form>\r\n      <div class=\"form-group\">\r\n        <label for=\"nameInput\">Name:</label>\r\n        <input class=\"form-control\" type=\"text\" name=\"nameInput\" [(ngModel)]=\"model.Name\" />\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"descriptionInput\">Description:</label>\r\n        <input class=\"form-control\" type=\"text\" name=\"descriptionInput\" [(ngModel)]=\"model.Description\" />\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <image-upload (onFileUploadFinish)=\"imageUploaded($event)\"></image-upload>\r\n      </div>\r\n      <input type=\"button\" class=\"btn btn-primary\" (click)=\"save()\" value=\"Save\" />\r\n    </form>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-5 col-md-offset-2\">\r\n    <label class=\"form-caption\">ADD CASE FORM</label>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-5 col-md-offset-2\">\r\n    <form>\r\n      <div class=\"form-group\">\r\n        <label for=\"nameInput\">Name:</label>\r\n        <input class=\"form-control\" type=\"text\" name=\"nameInput\" [(ngModel)]=\"model.Name\" />\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"descriptionInput\">Description:</label>\r\n        <input class=\"form-control\" type=\"text\" name=\"descriptionInput\" [(ngModel)]=\"model.Description\" />\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <image-upload (onFileUploadFinish)=\"imageUploaded($event)\"></image-upload>\r\n      </div>\r\n      <input type=\"button\" class=\"btn btn-primary\" (click)=\"save()\" value=\"Save\" />\r\n    </form>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -83,8 +65,7 @@ var CasesComponent = (function () {
 CasesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
-        template: __webpack_require__("../../../../../src/app/administration/cases/cases.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/administration/cases/cases.component.css")]
+        template: __webpack_require__("../../../../../src/app/administration/cases/cases.component.html")
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_app_services_upload_service__["a" /* FormsHttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_app_services_upload_service__["a" /* FormsHttpClient */]) === "function" && _b || Object])
 ], CasesComponent);
