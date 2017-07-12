@@ -112,7 +112,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".form-caption {\n  margin-top: 20px;\n  margin-bottom: 20px;\n  font-size: 25px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #d0d0d0;\n}\n.form-caption {\n  margin-top: 20px;\n  margin-bottom: 20px;\n  font-size: 25px;\n  font-weight: bold;\n}\n.welcome-container {\n  text-align: center;\n  background-image: url(\"/resources/laboratory_01.jpg\");\n  background-size: cover;\n  height: 700px;\n  position: relative;\n}\n.tooth-container {\n  background-color: #292929;\n}\n.tooth-wrapper {\n  border: 4px solid white;\n  margin: 20px;\n}\n.welcome-caption-container {\n  bottom: 100px;\n  position: absolute;\n  margin: auto;\n  width: 400px;\n  right: 25%;\n  left: 50%;\n  margin-left: -200px;\n}\n.welcome-caption1 {\n  color: white;\n  font-size: 45px;\n  font-weight: 600;\n}\n.welcome-caption2 {\n  color: white;\n  font-size: 40px;\n}\n.our-service-link {\n  border: 1px solid white;\n  border-radius: 0;\n  color: white;\n  margin-top: 40px;\n  background-color: transparent;\n}\n.navbar-header img {\n  margin: 30px 40px 0 100px;\n}\n.navbar-nav {\n  margin-top: 40px;\n}\n.navbar-nav a {\n  font-size: 15px;\n  color: white;\n}\n.vilab-toggle-button {\n  margin: 40px 60px 0 0;\n}\n.vilab-toggle-button span {\n  font-size: 25px;\n  color: white;\n}\n#logo {\n  text-align: left;\n}\n", ""]);
 
 // exports
 

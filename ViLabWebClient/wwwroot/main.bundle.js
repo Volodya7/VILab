@@ -140,7 +140,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <header>\r\n    <h1>VILab</h1>\r\n    <nav>\r\n      <ul>\r\n        <li><a [routerLink]=\"['/cases']\" href=\"\">Cases</a></li>\r\n        <li><a [routerLink]=\"['/']\" href=\"\">Home</a></li>\r\n      </ul>\r\n    </nav>\r\n  </header>\r\n  <main>\r\n    <section>\r\n      <router-outlet></router-outlet>\r\n    </section>\r\n  </main>\r\n</div>"
+module.exports = "<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -229,28 +229,10 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/home/home.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "Home page"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row welcome-container\">\r\n    <div id=\"menu\" class=\"navbar\">\r\n      <div class=\"navbar-header\">\r\n        <button class=\"btn navbar-toggle collapsed vilab-toggle-button\"\r\n                data-toggle=\"collapse\"\r\n                data-target=\"#vilab-menu\"\r\n                aria-expanded=\"false\"\r\n                aria-controls=\"navbar\">\r\n          <span class=\"glyphicon glyphicon-align-justify\"></span>\r\n        </button>\r\n        <div id=\"logo\">\r\n          <a href=\"#\">\r\n            <img src=\"resources/logo.png\"/>\r\n          </a>\r\n        </div>\r\n      </div>\r\n      <div class=\"navbar-collapse collapse in\" id=\"vilab-menu\">\r\n        <ul class=\"nav navbar-nav\">\r\n          <li class=\"nav\"><a href=\"#\">ПРО НАС</a></li>\r\n          <li class=\"nav\"><a href=\"#\">НАШІ ПОСЛУГИ</a></li>\r\n          <li class=\"nav\"><a href=\"#\">ЦІНИ</a></li>\r\n          <li class=\"nav\"><a href=\"#\">КОНТАКТИ</a></li>\r\n        </ul>\r\n      </div>\r\n      \r\n    </div>\r\n    <div class=\"welcome-caption-container\">\r\n      <div class=\"welcome-caption1\">РЕСТАВРУЄМО</div>\r\n      <div class=\"welcome-caption2\">ПОСМІШКУ</div>\r\n      <a href=\"#\" class=\"btn our-service-link\">НАШІ ПОСЛУГИ</a>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 tooth-container\">\r\n      <div class=\"tooth-wrapper\">\r\n        <img class=\"img-responsive\" src=\"resources/1.png\" />\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-4 tooth-container\">\r\n      <div class=\"tooth-wrapper\">\r\n        <img class=\"img-responsive\" src=\"resources/2.png\" />\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-4 tooth-container\">\r\n      <div class=\"tooth-wrapper\">\r\n        <img class=\"img-responsive\" src=\"resources/3.png\" />\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -275,8 +257,7 @@ var HomeComponent = (function () {
 HomeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'home-app',
-        template: __webpack_require__("../../../../../src/app/home/home.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/home/home.component.css")]
+        template: __webpack_require__("../../../../../src/app/home/home.component.html")
     })
 ], HomeComponent);
 

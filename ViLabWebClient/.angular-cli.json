@@ -9,6 +9,7 @@
       "outDir": "wwwroot",
       "assets": [
         "assets",
+        "resources",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -22,7 +23,8 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "styles/main.less"
       ],
-      "scripts": [],
+      "scripts": [
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

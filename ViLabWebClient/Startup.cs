@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 
 namespace ViLabWebClient
@@ -28,7 +29,7 @@ namespace ViLabWebClient
       app.UseMvc(routes =>
           {
             routes.MapRoute("default", "{controller=App}/{action=Index}/{id?}");
-            routes.MapRoute("Not found", "{*url}", new {controller = "App", action = "Index"});
+            routes.MapRoute("Not found", "{*url}", new { controller = "App", action = "Index" });
           });
 
     }
