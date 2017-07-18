@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="src\app\administration\categories\" />
+    <Folder Include="src\app\administration\subcategories\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
