@@ -2,10 +2,12 @@
 using DbModel.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using VILab.API.Dto.Retrieve;
 
 namespace VILab.API.Controllers
 {
+    [Authorize]
     [Route("api/cities")]
     public class CitiesController : Controller
     {

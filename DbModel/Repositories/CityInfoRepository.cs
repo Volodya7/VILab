@@ -15,54 +15,48 @@ namespace DbModel.Repositories
         }
         public IEnumerable<City> GetCities()
         {
-            return _context.Cities.OrderBy(c=>c.Name).ToList();
+            return null;
         }
 
         public bool CityExists(int cityId)
         {
-            return _context.Cities.Any(c => c.Id == cityId);
+            return false;
         }
 
         public City GetCity(int cityId,bool includePointsOfInterests)
         {
-            if (includePointsOfInterests)
-            {
-                return _context.Cities.Include(c => c.PointsOfInterest).FirstOrDefault(c => c.Id == cityId);
-            }
 
-            return _context.Cities.FirstOrDefault(c => c.Id == cityId);
+            return null;
         }
 
         public IEnumerable<PointOfInterest> GetPointsOfInterest(int cityId)
         {
-            return _context.PointsOfInterests.Where(p => p.CityId == cityId).ToList();
+            return null;
         }
 
         public PointOfInterest GetPointOfInterestForCity(int cityId, int pointOfinterestId)
         {
-            return _context.PointsOfInterests
-                .FirstOrDefault(p => p.CityId == cityId && p.Id == pointOfinterestId);
+            return null;
         }
 
         public void AddPointOfInterestForCity(int cityId, PointOfInterest pointOfInterest)
         {
-            var city = GetCity(cityId, false);
-            city.PointsOfInterest.Add(pointOfInterest);
+           
         }
 
         public void DeletePointOfinterest(PointOfInterest pointOfinterest)
         {
-            _context.PointsOfInterests.Remove(pointOfinterest);
+            
         }
 
         public bool Save()
         {
-            return (_context.SaveChanges() >= 0);
+            return false;
         }
 
         public bool PointOfInterestExists(int pointOfinterestId)
         {
-            return _context.PointsOfInterests.Any(p => p.Id == pointOfinterestId);
+            return false;
         }
     }
 }

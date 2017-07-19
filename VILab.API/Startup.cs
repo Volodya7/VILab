@@ -42,7 +42,7 @@ namespace VILab.API
             services.AddTransient<IMailService, LocalMailService>();
 
             var connectionString = Startup.Configuration["connectionStrings:VILabDBConnectionString"];
-            services.AddEntityFramework(connectionString);
+            services.AddEntityFrameworkExt(connectionString);
 
             services.AddMvc();
             services.AddScoped<ICityInfoRepository, CityInfoRepository>();
@@ -51,8 +51,9 @@ namespace VILab.API
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
             services.AddAWSService<IAmazonS3>();
 
-            var corsBuilder = SetupCorsBuilder();
+            services.AddIdentityExt();
 
+            var corsBuilder = SetupCorsBuilder();
             services.AddCors(options =>
             {
                 options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
@@ -100,6 +101,8 @@ namespace VILab.API
             });
 
             //InitAwsCredetialsFile();
+
+            app.UseIdentity();
 
             app.UseMvc();
         }
