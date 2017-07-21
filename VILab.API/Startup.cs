@@ -8,9 +8,11 @@ using DbModel;
 using DbModel.Entities;
 using DbModel.Extensions;
 using DbModel.Repositories;
+using DbModel.Seeders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,6 +27,7 @@ namespace VILab.API
     public class Startup
     {
         public static IConfigurationRoot Configuration;
+        private static IHostingEnvironment _environment;
 
         public Startup(IHostingEnvironment env)
         {
@@ -35,6 +38,7 @@ namespace VILab.API
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+            _environment = env;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -44,14 +48,24 @@ namespace VILab.API
             var connectionString = Startup.Configuration["connectionStrings:VILabDBConnectionString"];
             services.AddEntityFrameworkExt(connectionString);
 
-            services.AddMvc();
-            services.AddScoped<ICityInfoRepository, CityInfoRepository>();
+            services.AddMvc(opt =>
+            {
+                if (!_environment.IsProduction())
+                {
+                    opt.SslPort = 44351;
+                }
+                opt.Filters.Add(new RequireHttpsAttribute());
+            });
+
+            services.AddScoped<IVILabRepository, VILabRepository>();
             services.AddScoped<IS3Service, S3Service>();
 
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
             services.AddAWSService<IAmazonS3>();
 
             services.AddIdentityExt();
+
+            services.AddTransient<IdentitySeeder>();
 
             var corsBuilder = SetupCorsBuilder();
             services.AddCors(options =>
@@ -72,7 +86,7 @@ namespace VILab.API
         }
 
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ViLabContext viLabContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ViLabContext viLabContext, IdentitySeeder identitySeeder)
         {
             loggerFactory.AddConsole();
             loggerFactory.AddNLog();
@@ -101,10 +115,11 @@ namespace VILab.API
             });
 
             //InitAwsCredetialsFile();
-
             app.UseIdentity();
 
             app.UseMvc();
+
+            //identitySeeder.Seed().Wait();
         }
 
         private void InitAwsCredetialsFile()

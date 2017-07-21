@@ -5,7 +5,7 @@ using DbModel.Entities;
 
 namespace DbModel.Repositories
 {
-    public class CityInfoRepository:ICityInfoRepository
+    public class CityInfoRepository
     {
         private ViLabContext _context;
 
