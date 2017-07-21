@@ -38,6 +38,8 @@ namespace DbModel.Extensions
                         return Task.CompletedTask;
                     }
                 };
+
+                //Password
                 config.Password.RequireDigit = true;
                 config.Password.RequiredLength = 8;
                 config.Password.RequireNonAlphanumeric = true;
