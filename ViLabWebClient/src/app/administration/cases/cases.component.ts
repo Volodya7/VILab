@@ -5,7 +5,7 @@ import { Case } from 'app/models/case';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './cases.component.html'
+  templateUrl: './cases.html'
 })
 export class CasesComponent implements OnInit {
   constructor(private _httpService: Http, private _httpClient: FormsHttpClient) { }

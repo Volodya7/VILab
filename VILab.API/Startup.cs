@@ -1,4 +1,5 @@
-﻿using Amazon;
+﻿using System.Text;
+using Amazon;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
 using Amazon.Runtime.SharedInterfaces;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
 using VILab.API.Dto.Create;
 using VILab.API.Dto.Retrieve;
@@ -64,6 +66,11 @@ namespace VILab.API
             services.AddAWSService<IAmazonS3>();
 
             services.AddIdentityExt();
+
+            services.AddAuthorization(cfg =>
+            {
+                cfg.AddPolicy("SuperUsers",p=>p.RequireClaim("SuperUser","True"));
+            });
 
             services.AddTransient<IdentitySeeder>();
 
@@ -116,6 +123,20 @@ namespace VILab.API
 
             //InitAwsCredetialsFile();
             app.UseIdentity();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = Configuration["Tokens:Issuer"],
+                    ValidAudience = Configuration["Tokens:Audience"],
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                    ValidateLifetime = true
+                }
+            });
 
             app.UseMvc();
 

@@ -69,18 +69,20 @@ namespace VILab.API.Controllers
                     if (_hasher.VerifyHashedPassword(user, user.PasswordHash, model.Password) ==
                         PasswordVerificationResult.Success)
                     {
+                        var userClaims = await _userMng.GetClaimsAsync(user);
+
                         var claims = new[]
                         {
                             new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        };
+                        }.Union(userClaims);
 
-                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DONTEVENTRYTOSTEALVERYIMPORTANTTOOTHINFORMATION"));
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Startup.Configuration["Tokens:Key"]));
                         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                         var token = new JwtSecurityToken(
-                            issuer: "http://localhost:2234",
-                            audience: "http://localhost:2234",
+                            issuer: Startup.Configuration["Tokens:Issuer"],
+                            audience: Startup.Configuration["Tokens:Audience"],
                             claims: claims,
                             expires: DateTime.UtcNow.AddMinutes(15),
                             signingCredentials: creds);

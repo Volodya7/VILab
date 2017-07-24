@@ -16,7 +16,7 @@ using VILab.API.Services.S3Service;
 
 namespace VILab.API.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "SuperUsers")]
     [EnableCors("SiteCorsPolicy")]
     [Route("api/cases")]
     public class CasesController : Controller
