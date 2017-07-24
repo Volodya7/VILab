@@ -12,7 +12,7 @@ import {ContactsComponent} from './contacts/contacts.component';
 
 
 
-import { AuthGuard } from '../services/auth-guard.service';
+import { AuthGuard } from '../guards/auth-guard.service';
 
 const adminRoutes: Routes = [
   {

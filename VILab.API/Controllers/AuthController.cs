@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DbModel.Entities;
 using DbModel.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,8 @@ using VILab.API.Models;
 
 namespace VILab.API.Controllers
 {
-    [Route("api/auth")]
+  [EnableCors("SiteCorsPolicy")]
+  [Route("api/auth")]
     public class AuthController : Controller
     {
         private IVILabRepository _repository;
