@@ -5,9 +5,9 @@ import { Case } from 'app/models/case';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './cases.html'
+  templateUrl: './admin-cases.html'
 })
-export class CasesComponent implements OnInit {
+export class AdminCasesComponent implements OnInit {
   constructor(private _httpService: Http, private _httpClient: FormsHttpClient) { }
 
   apiValues: object;
