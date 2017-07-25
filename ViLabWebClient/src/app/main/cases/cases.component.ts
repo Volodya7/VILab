@@ -2,8 +2,8 @@
 
 @Component({
   selector: 'app-root',
-  templateUrl: './categories.html'
+  templateUrl: './cases.html'
 })
-export class CategoriesComponent {
+export class CasesComponent {
 
 }
