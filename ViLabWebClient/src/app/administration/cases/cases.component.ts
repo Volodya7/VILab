@@ -19,7 +19,6 @@ export class CasesComponent implements OnInit {
   }
 
   imageUploaded(event) {
-    console.log(event);
     this.files.push(event.file);
   }
 

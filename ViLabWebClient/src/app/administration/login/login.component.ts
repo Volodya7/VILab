@@ -19,8 +19,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.model.username, this.model.password).then((data) => {
-      console.log("component : ");
-      console.log(data);
     });
 
   }

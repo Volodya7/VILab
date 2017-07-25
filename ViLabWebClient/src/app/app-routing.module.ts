@@ -4,8 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { CasesComponent } from './administration/cases/cases.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: HomeComponent}
-
+  { path: '', pathMatch: 'full', component: HomeComponent }
 ];
 
 @NgModule({
