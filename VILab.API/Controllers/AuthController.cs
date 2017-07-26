@@ -86,7 +86,7 @@ namespace VILab.API.Controllers
                             issuer: Startup.Configuration["Tokens:Issuer"],
                             audience: Startup.Configuration["Tokens:Audience"],
                             claims: claims,
-                            expires: DateTime.UtcNow.AddMinutes(15),
+                            expires: DateTime.UtcNow.AddHours(8),
                             signingCredentials: creds);
 
                         return Ok(new

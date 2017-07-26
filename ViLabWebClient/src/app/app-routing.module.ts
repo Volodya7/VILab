@@ -4,7 +4,8 @@ import { HomeComponent } from './main/home/home.component';
 import { CaseComponent } from './main/case/case.component';
 import {CasesComponent} from './main/cases/cases.component';
 import {ContactsComponent} from './main/contacts/contacts.component';
-import {GalleryComponent} from './main/gallery/gallery.component';
+import { GalleryComponent } from './main/gallery/gallery.component';
+import { NotFoundComponent} from './main/other/notFound/notfound.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'cases', component: CasesComponent },
   { path: 'contacts',  component: ContactsComponent },
   { path: 'gallery', component: GalleryComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
@@ -26,5 +28,6 @@ export const routableComponents = [
   CaseComponent,
   CasesComponent,
   ContactsComponent,
-  GalleryComponent
+  GalleryComponent,
+  NotFoundComponent
 ];
