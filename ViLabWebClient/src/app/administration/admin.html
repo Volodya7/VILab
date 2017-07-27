@@ -1,21 +1,21 @@
-﻿  <div id="adminMenu">
-    <ul>
-      <li><a routerLink="dashboard">Dashboard</a></li>
-      <li><a routerLink="cases">Cases</a></li>
-      <li><a routerLink="categories">Categories</a></li>
-      <li><a routerLink="subcategories">Subcategories</a></li>
-      <li><a routerLink="contacts">Contacts</a></li>
-      <li><a routerLink="users">Users</a></li>
-    </ul>
-  </div>
-<div  id="centralBlock">
-  <div class="row" id="blueSpan">
-      <div class="col-md-3 col-md-offset-9">
-        <button class="btn btn-primary" (click)="logout()">Logout</button>
+﻿<div id="adminPage">
+  <div class="row">
+    <div class="col-md-2 col-md-offset-10">
+      <button class="btn btn-primary" (click)="logout()">Logout</button>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-9" id="adminContent">
+    <div class="col-md-2" id="adminMenu">
+      <ul>
+        <li><a routerLink="dashboard">Dashboard</a></li>
+        <li><a routerLink="cases">Cases</a></li>
+        <li><a routerLink="categories">Categories</a></li>
+        <li><a routerLink="subcategories">Subcategories</a></li>
+        <li><a routerLink="contacts">Contacts</a></li>
+        <li><a routerLink="users">Users</a></li>
+      </ul>
+    </div>
+    <div class="col-md-10" id="adminContent">
       <router-outlet></router-outlet>
     </div>
   </div>

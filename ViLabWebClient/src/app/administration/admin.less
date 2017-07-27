@@ -1,14 +1,14 @@
-﻿#adminMenu {
+﻿@media (min-width: 992px){
+#adminMenu {
   background-color: white;
   height: 100vh;
-  width: 298px;
-  position: fixed;
 }
 
 #adminMenu ul {
   list-style: none;
   padding-left: 0;
-  padding-top: 40%
+  padding-top: 20%;
+
 }
 
 #adminMenu ul li a:hover {
@@ -19,6 +19,7 @@
 #adminMenu ul li a:focus {
   border-left-color: rgb(85,116,224);
   text-decoration: none;
+  padding-left: 22%;
   color: black;
 }
 
@@ -29,17 +30,6 @@
   font-family: 'Roboto', sans-serif;
   color: rgb(102,102,102);
   border-left: 4px solid white;
-  padding: 5px 5px 5px 40px;
+  padding: 5px 5px 5px 22%;
 }
-
-#centralBlock {
-  margin-left: 298px;
-}
-
-#blueSpan {
-  background-color: rgb(85,116,224)
-}
-
-.row {
-  overflow: hidden;
 }
