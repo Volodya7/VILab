@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata;
 using System.Text;
 
 namespace DbModel.Entities
 {
-    public class Subject
-    {
+    public class Subcategory
+  {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -21,6 +20,11 @@ namespace DbModel.Entities
 
         public string Description { get; set; }
 
-        public ICollection<Unit> Units { get; set; } = new List<Unit>();
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public ICollection<Case> Cases { get; set; } = new List<Case>();
     }
 }

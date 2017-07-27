@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<div id="adminPage">
   <div class="row">
     <div class="col-md-2 col-md-offset-10">
@@ -11,12 +12,35 @@
         <li><a routerLink="cases">Cases</a></li>
         <li><a routerLink="categories">Categories</a></li>
         <li><a routerLink="subcategories">Subcategories</a></li>
+=======
+﻿<div class="container-fluid">
+  <div class="row">
+    <div id="adminMenu" class="col-md-3 col-lg-2 col-sm-3">
+      <ul>
+        <li><a routerLink="dashboard">Dashboard</a></li>
+        <li><a routerLink="cases">Cases</a></li>
+        <li><a routerLink="categories">Categories / Subcategories</a></li>
+>>>>>>> 3c312b4f4dd23b1412d4c40f0497e06dc6db5051
         <li><a routerLink="contacts">Contacts</a></li>
         <li><a routerLink="users">Users</a></li>
       </ul>
     </div>
+<<<<<<< HEAD
     <div class="col-md-10" id="adminContent">
       <router-outlet></router-outlet>
+=======
+    <div  id="centralBlock" class="col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 col-sm-9 col-sm-offset-3">
+      <div class="row admin-nav">
+        <div class="col-md-2 col-md-offset-9 col-lg-offset-10">
+          <button class="btn btn-default logout" (click)="logout()">Logout</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" id="adminContent">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+>>>>>>> 3c312b4f4dd23b1412d4c40f0497e06dc6db5051
     </div>
   </div>
 </div>

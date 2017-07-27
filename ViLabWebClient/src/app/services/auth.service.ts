@@ -17,7 +17,7 @@ export class AuthService {
   currentUser: UserInfo;
   authToken: AuthToken;
 
-  public redirectUrl: string;
+  public redirectUrl: string = "admin";
 
 
   login(username: string, password: string) {
