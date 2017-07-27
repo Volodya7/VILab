@@ -14,6 +14,6 @@ namespace DbModel
             Database.EnsureCreated();
         }
 
-        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

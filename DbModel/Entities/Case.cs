@@ -21,7 +21,7 @@ namespace DbModel.Entities
         public string Description { get; set; }
 
         [ForeignKey("UnitId")]
-        public Unit Unit { get; set; }
+        public Subcategory Unit { get; set; }
 
         public int UnitId { get; set; }
 

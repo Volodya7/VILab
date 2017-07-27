@@ -6,7 +6,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
 import { AdminCasesComponent } from './admin-cases/admin-cases.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
-import { SubcategoriesComponent } from './subcategories/subcategories.component'
 import { UsersComponent } from './users/users.component';
 import { ContactsComponent } from './contacts/contacts.component';
 
@@ -21,7 +20,6 @@ const adminRoutes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'cases', component: AdminCasesComponent },
       { path: 'categories', component: AdminCategoriesComponent },
-      { path: 'subcategories', component: SubcategoriesComponent },
       { path: 'users', component: UsersComponent },
       { path: 'contacts', component: ContactsComponent }
     ]
@@ -43,7 +41,6 @@ export const adminRoutableComponents = [
   AdminComponent,
   AdminCasesComponent,
   AdminCategoriesComponent,
-  SubcategoriesComponent,
   UsersComponent,
   ContactsComponent
 ];
