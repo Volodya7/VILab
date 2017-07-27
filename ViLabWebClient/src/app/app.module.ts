@@ -24,8 +24,8 @@ import { AdminRoutingModule, adminRoutableComponents } from './administration/ad
     FormsModule,
     HttpModule,
     ImageUploadModule.forRoot(),
-    AppRoutingModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    AppRoutingModule
   ],
   providers: [FormsHttpClient, AuthGuard, RestService, AuthService],
   bootstrap: [AppComponent]
