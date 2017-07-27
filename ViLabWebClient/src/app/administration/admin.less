@@ -1,45 +1,46 @@
-﻿#adminMenu {
-  background-color: white;
-  height: 100vh;
-  width: 298px;
+﻿@admin-active-link-color: black;
+@admin-menu-bgcolor: white;
+@admin-nav-bgcolor: #5574e0;
+
+#adminMenu {
+  background-color: @admin-menu-bgcolor;
+  height: 100%;
   position: fixed;
 }
 
 #adminMenu ul {
   list-style: none;
   padding-left: 0;
-  padding-top: 40%
+  padding-top: 100px;
+
+  li {
+    a:hover {
+      color: @admin-active-link-color;
+      text-decoration: none;
+    }
+
+    a:focus {
+      border-left-color: @admin-nav-bgcolor;
+      text-decoration: none;
+      color: @admin-active-link-color;
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      font-size: 18px;
+      font-family: 'Roboto', sans-serif;
+      color: rgb(102,102,102);
+      border-left: 4px solid white;
+      padding: 5px 5px 5px 40px;
+    }
+  }
 }
 
-#adminMenu ul li a:hover {
-  color: black;
-  text-decoration: none;
+.admin-nav {
+  background-color: @admin-nav-bgcolor;
 }
 
-#adminMenu ul li a:focus {
-  border-left-color: rgb(85,116,224);
-  text-decoration: none;
-  color: black;
-}
-
-#adminMenu ul li a {
-  display: block;
-  width: 100%;
-  font-size: 18px;
-  font-family: 'Roboto', sans-serif;
-  color: rgb(102,102,102);
-  border-left: 4px solid white;
-  padding: 5px 5px 5px 40px;
-}
-
-#centralBlock {
-  margin-left: 298px;
-}
-
-#blueSpan {
-  background-color: rgb(85,116,224)
-}
-
-.row {
-  overflow: hidden;
+.logout {
+  margin: 5px;
 }
