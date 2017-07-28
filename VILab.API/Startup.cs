@@ -115,12 +115,11 @@ namespace VILab.API
 
       AutoMapper.Mapper.Initialize(cfg =>
       {
-        cfg.CreateMap<City, CityWithoutPointsOfInterestDto>();
-        cfg.CreateMap<City, CityDto>();
-        cfg.CreateMap<PointOfInterest, PointOfInterestDto>();
-        cfg.CreateMap<PointOfInterestForCreationDto, PointOfInterest>();
         cfg.CreateMap<PointOfInterestForUpdateDto, PointOfInterest>();
         cfg.CreateMap<PointOfInterest, PointOfInterestForUpdateDto>();
+
+        cfg.CreateMap<CategoryForCreationDto, Category>();
+        cfg.CreateMap<Category, CategoryDto>();
       });
 
       //InitAwsCredetialsFile();

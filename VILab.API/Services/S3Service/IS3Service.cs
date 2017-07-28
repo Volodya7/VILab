@@ -9,6 +9,6 @@ namespace VILab.API.Services.S3Service
 {
     public interface IS3Service
     {
-        bool UploadFile(IFormFile file);
+        string UploadFile(IFormFile file);
     }
 }

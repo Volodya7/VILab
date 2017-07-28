@@ -9,6 +9,8 @@ import { AdminCategoriesComponent } from './admin-categories/admin-categories.co
 import { UsersComponent } from './users/users.component';
 import { ContactsComponent } from './contacts/contacts.component';
 
+import { CategoryService} from './admin-categories/admin-category.service';
+
 
 
 import { AuthGuard } from '../guards/auth-guard.service';
@@ -28,6 +30,7 @@ const adminRoutes: Routes = [
 
 ];
 
+
 @NgModule({
   imports: [RouterModule.forRoot(adminRoutes)],
   exports: [RouterModule]
@@ -44,3 +47,5 @@ export const adminRoutableComponents = [
   UsersComponent,
   ContactsComponent
 ];
+
+export const adminServices = [CategoryService];
