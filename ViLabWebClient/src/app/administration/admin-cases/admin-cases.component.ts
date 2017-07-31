@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
-import { FormsHttpClient } from 'app/services/upload.service';
+import { RestService } from 'app/services/rest.service';
 import { Case } from 'app/models/case';
 
 @Component({
@@ -8,7 +8,7 @@ import { Case } from 'app/models/case';
   templateUrl: './admin-cases.html'
 })
 export class AdminCasesComponent implements OnInit {
-  constructor(private _httpService: Http, private _httpClient: FormsHttpClient) { }
+  constructor(private _httpService: Http, private restService: RestService) { }
 
   apiValues: object;
   files: File[] = [];
@@ -23,7 +23,7 @@ export class AdminCasesComponent implements OnInit {
   }
 
   save() {
-    this._httpClient.postWithFile("", this.model, this.files).then(result => {
+    this.restService.POSTWithFile("", this.model, this.files[0]).subscribe(result => {
       console.log(result);
     });
   }

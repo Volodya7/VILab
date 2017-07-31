@@ -1,1 +1,76 @@
-﻿admin categories
+﻿<div class="row">
+  <div class="col-md-7" id="categories">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="category-container">
+          <label>Категорії послуг</label>
+          <a href="javascript:void(0)" (click)="isCategoryEditMode = true"><i class="glyphicon glyphicon-plus-sign add-button"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="addCategoryForm"  *ngIf="isCategoryEditMode">
+      <div class="col-md-12">
+        <div class="editCategoryContainer">
+          <div class="row">
+            <div class="col-md-12">
+              <label class="category-container-header">Додати категорію</label>
+            </div>
+          </div>
+          <div class="row">
+            <form name="createEditCategoryForm">
+              <div class="col-md-5">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="categoryName">Назва категорії</label>
+                      <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="категорія" [(ngModel)]="categoryModel.Name">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="categoryDescription">Опис</label>
+                      <input type="text" class="form-control" id="categoryDescription" name="categoryDescription" placeholder="опис" [(ngModel)]="categoryModel.Description">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Зображення</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <image-upload (onFileUploadFinish)="imageUploaded($event)" [max]="1"></image-upload>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row submit-section">
+            <div class="col-md-3">
+              <button class="btn btn-primary btn-block" (click)="createCategoty()">Зберегти</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-default btn-block" (click)="isCategoryEditMode = false">Скасувати</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngFor="let category of categories"></div>
+  </div>
+  <div class="col-md-5" id="subcategories">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="subcategory-container">
+          <label>Підкатегорії </label>
+          <a href="#"><i class="glyphicon glyphicon-plus-sign add-button"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-﻿import { Injectable, OnInit } from "@angular/core";
+﻿import { Injectable } from "@angular/core";
 import { RestService } from './rest.service';
 import { UserInfo } from 'app/models/userInfo';
 import { AuthToken } from 'app/models/authorizationToken';

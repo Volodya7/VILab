@@ -11,7 +11,9 @@ import { RestService } from './services/rest.service';
 import { AuthService } from './services/auth.service';
 
 import { AppRoutingModule, routableComponents } from './app-routing.module';
-import { AdminRoutingModule, adminRoutableComponents } from './administration/admin-routing.module';
+import { AdminRoutingModule, adminRoutableComponents, adminServices } from './administration/admin-routing.module';
+
+const services = [FormsHttpClient, AuthGuard, RestService, AuthService];
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { AdminRoutingModule, adminRoutableComponents } from './administration/ad
     AdminRoutingModule,
     AppRoutingModule
   ],
-  providers: [FormsHttpClient, AuthGuard, RestService, AuthService],
+  providers: [services, adminServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
