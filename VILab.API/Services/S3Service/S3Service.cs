@@ -16,8 +16,8 @@ namespace VILab.API.Services.S3Service
   {
     private IAmazonS3 _s3Client;
 
-    private const string BucketName = "volodymyrbabak";
-    private const string AmazonS3Url = "https://s3.eu-central-1.amazonaws.com";
+    private const string BucketName = "vilab";
+    private const string AmazonS3Url = "http://vilab.s3-website.eu-central-1.amazonaws.com/size";
 
     public S3Service(IAmazonS3 s3Client)
     {
@@ -36,7 +36,7 @@ namespace VILab.API.Services.S3Service
         fileTransferUtility.Upload(ms, BucketName, filename);
       }
 
-      return string.Format("{0}/{1}/{2}",AmazonS3Url, BucketName, filename);
+      return string.Format("{0}/{1}",AmazonS3Url, filename);
 
     }
 

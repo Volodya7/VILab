@@ -38,10 +38,11 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoryService.getCategories().then((data:Object[]) => {
+    this.categoryService.getCategories().then((data: Object[]) => {
+      var imgSize = 300;
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-          this.categories.push(new Category(data[i]));
+          this.categories.push(new Category(data[i], imgSize));
         }
 
         console.log(this.categories);
