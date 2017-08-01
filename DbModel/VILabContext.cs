@@ -6,14 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DbModel
 {
-    public class ViLabContext: IdentityDbContext<ApplicationUser>
+  public class ViLabContext : IdentityDbContext<ApplicationUser>
+  {
+
+    public ViLabContext(DbContextOptions<ViLabContext> options) : base(options)
     {
-
-        public ViLabContext(DbContextOptions<ViLabContext> options) : base(options)
-        {
-            Database.EnsureCreated();
-        }
-
-        public DbSet<Category> Categories { get; set; }
+      Database.EnsureCreated();
     }
+
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Subcategory> Subcategories { get; set; }
+  }
 }

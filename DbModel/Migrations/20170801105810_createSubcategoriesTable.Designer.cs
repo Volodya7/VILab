@@ -8,9 +8,10 @@ using DbModel;
 namespace DbModel.Migrations
 {
     [DbContext(typeof(ViLabContext))]
-    partial class CityInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20170801105810_createSubcategoriesTable")]
+    partial class createSubcategoriesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)

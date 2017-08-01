@@ -9,6 +9,7 @@ namespace DbModel.Repositories
   {
     void AddCategory(Category category);
     IEnumerable<Category> GetCategories();
+    void AddSubcategory(Subcategory subcategory);
     bool Save();
   }
 }

@@ -1,6 +1,7 @@
 ﻿import { Injectable } from "@angular/core";
 import { RestService } from 'app/services/rest.service';
 import { CreateCategory } from 'app/models/admin/create/createCategory';
+import { CreateSubcategory } from 'app/models/admin/create/createSubcategory';
 
 @Injectable()
 export class CategoryService {
@@ -8,10 +9,14 @@ export class CategoryService {
     this.restService = restService;
   }
 
-  baseCategoryUrl:string="categories";
+  baseCategoryUrl: string = "categories";
+  baseSubcategoryUrl:string="subcategories";
 
   createCategory(category: CreateCategory) {
     return this.restService.POSTWithFile(this.baseCategoryUrl, category, category.Image);
+  }
+  createSubcategory(subcategory: CreateSubcategory) {
+    return this.restService.POST(this.baseSubcategoryUrl, subcategory);
   }
 
   getCategories() {

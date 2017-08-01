@@ -62,7 +62,7 @@ namespace VILab.API.Controllers
         return BadRequest($"failed to create category {category.Name}");
       }
 
-      return Ok($"successfully created category {category.Name}");
+      return Ok();
     }
   }
 }

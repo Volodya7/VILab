@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { CreateCategory } from 'app/models/admin/create/createCategory';
+import { CreateSubcategory } from 'app/models/admin/create/createSubcategory';
 import { CategoryService } from './admin-category.service';
 import { Category } from 'app/models/admin/read/category';
 
@@ -15,7 +16,10 @@ export class AdminCategoriesComponent implements OnInit {
   //variables
 
   categoryModel: CreateCategory = new CreateCategory();
+  subcategoryModel: CreateSubcategory = new CreateSubcategory();
+
   isCategoryEditMode: boolean = false;
+  isSubcategoryEditMode: boolean = false;
   categories: Category[] = [];
 
 
@@ -26,9 +30,14 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   createCategoty() {
-    console.log(this.categoryModel);
-
     this.categoryService.createCategory(this.categoryModel).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  createSubCategoty() {
+    console.log(this.subcategoryModel);
+    this.categoryService.createSubcategory(this.subcategoryModel).subscribe(data => {
       console.log(data);
     });
   }

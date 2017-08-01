@@ -83,7 +83,50 @@
       <div class="col-md-12">
         <div class="subcategory-container">
           <label>Підкатегорії </label>
-          <a href="#"><i class="glyphicon glyphicon-plus-sign add-button"></i></a>
+          <a href="javascript:void(0)" (click)="isSubcategoryEditMode = true"><i class="glyphicon glyphicon-plus-sign add-button"></i></a>
+        </div>
+      </div>
+    </div>
+    <div id="addSubcategoryForm" class="row" *ngIf="isSubcategoryEditMode">
+      <div class="col-md-12">
+        <div class="editSubcategoryContainer">
+          <div class="row">
+            <div class="col-md-12">
+              <label class="category-container-header">Додати підкатегорію</label>
+            </div>
+          </div>
+          <div class="row">
+            <form name="editSubcategoryForm">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="subcategoryName">Назва підкатегорії</label>
+                      <input type="text" class="form-control" id="subcategoryName" name="subcategoryName" placeholder="підкатегорія" [(ngModel)]="subcategoryModel.Name">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="categoryDropDown">Категорія</label>
+                      <select class="form-control" id="categoryDropDown" name="categoryDropDown" [(ngModel)]="subcategoryModel.CategoryId">
+                        <option *ngFor="let category of categories" [ngValue]="category.Id">{{category.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row submit-section">
+            <div class="col-md-3">
+              <button class="btn btn-primary btn-block" (click)="createSubCategoty()">Зберегти</button>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-default btn-block" (click)="isSubcategoryEditMode = false">Скасувати</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -99,10 +99,10 @@ export class RestService {
   }
   request(requestoptions: RequestOptions) {
     return this.http.request(new Request(requestoptions))
-      .map((res: Response) => {
-        if (res) {
-          return { status: res.status, json: res.json() }
-        }
-      });
+      .map(this.extractData);
+  }
+
+  extractData(res: Response) {
+    return { status: res.status, json: res.text() ? res.json() : {} };
   }
 }

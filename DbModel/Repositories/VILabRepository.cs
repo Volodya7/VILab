@@ -26,6 +26,11 @@ namespace DbModel.Repositories
       return _context.Categories.ToList();
     }
 
+    public void AddSubcategory(Subcategory subcategory)
+    {
+      _context.Subcategories.Add(subcategory);
+    }
+
     public bool Save()
     {
       return _context.SaveChanges() > 0;

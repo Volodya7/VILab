@@ -10,6 +10,10 @@
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Dto\Create\SubcategoryForCreationDto.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.1.0" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.1" />
