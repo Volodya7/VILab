@@ -1,11 +1,11 @@
 ﻿export class Subcategory {
-  public Id: number;
-  public Name: string;
-  public CategoryId: number;
+  public id: number;
+  public name: string;
+  public categoryId: number;
 
   constructor(model) {
-    this.Id = model == null ? 0 : model.id;
-    this.Name = model == null ? "" : model.name;
-    this.CategoryId = model == null ? "" : model.categoryId;
+    this.id = model == null ? 0 : model.id;
+    this.name = model == null ? "" : model.name;
+    this.categoryId = model == null ? "" : model.categoryId;
   }
 }

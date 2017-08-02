@@ -21,6 +21,6 @@ namespace DbModel.Entities
 
         public string Description { get; set; }
 
-        public ICollection<Subcategory> Units { get; set; } = new List<Subcategory>();
+        public ICollection<Subcategory> Subcategories { get; set; } = new List<Subcategory>();
     }
 }

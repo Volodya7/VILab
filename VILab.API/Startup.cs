@@ -122,6 +122,7 @@ namespace VILab.API
         cfg.CreateMap<Category, CategoryDto>();
 
         cfg.CreateMap<SubcategoryForCreationDto, Subcategory>();
+        cfg.CreateMap<Subcategory, SubcategoryDto>();
       });
 
       //InitAwsCredetialsFile();

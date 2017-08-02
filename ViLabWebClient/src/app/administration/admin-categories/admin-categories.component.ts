@@ -31,14 +31,16 @@ export class AdminCategoriesComponent implements OnInit {
 
   createCategoty() {
     this.categoryService.createCategory(this.categoryModel).subscribe(data => {
-      console.log(data);
+      this.getCategories();
+      this.isCategoryEditMode = false;
     });
   }
 
   createSubCategoty() {
     console.log(this.subcategoryModel);
     this.categoryService.createSubcategory(this.subcategoryModel).subscribe(data => {
-      console.log(data);
+      this.isSubcategoryEditMode = false;
+      this.getCategories();
     });
   }
 
@@ -48,14 +50,35 @@ export class AdminCategoriesComponent implements OnInit {
 
   getCategories() {
     this.categoryService.getCategories().then((data: Object[]) => {
-      var imgSize = 300;
+      let imgSize = 300;
+      let receivedCategories: Category[] = [];
       if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-          this.categories.push(new Category(data[i], imgSize));
+          receivedCategories.push(new Category(data[i], imgSize));
         }
-
-        console.log(this.categories);
       }
+
+      this.categories = receivedCategories;
+
+      console.log(this.categories);
     });
+  }
+
+  deleteCategory(categoryId) {
+    if (categoryId != null) {
+      this.categoryService.deleteCategory(categoryId).subscribe(data => {
+        console.log(data);
+        this.getCategories();
+      });
+    }
+  }
+
+  deleteSubcategory(subcategoryId) {
+    if (subcategoryId != null) {
+      this.categoryService.deleteSubcategory(subcategoryId).subscribe(data => {
+        console.log(data);
+        this.getCategories();
+      });
+    }
   }
 }

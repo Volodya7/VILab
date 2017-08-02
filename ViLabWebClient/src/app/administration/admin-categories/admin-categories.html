@@ -23,7 +23,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="categoryName">Назва категорії</label>
-                      <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="категорія" [(ngModel)]="categoryModel.Name">
+                      <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="категорія" [(ngModel)]="categoryModel.name">
                     </div>
                   </div>
                 </div>
@@ -31,7 +31,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="categoryDescription">Опис</label>
-                      <input type="text" class="form-control" id="categoryDescription" name="categoryDescription" placeholder="опис" [(ngModel)]="categoryModel.Description">
+                      <input type="text" class="form-control" id="categoryDescription" name="categoryDescription" placeholder="опис" [(ngModel)]="categoryModel.description">
                     </div>
                   </div>
                 </div>
@@ -65,13 +65,30 @@
       <div class="col-md-12">
         <div class="category-container">
           <div class="row">
-            <div class="col-md-12">
-              <label>{{category.Name}}</label>
+            <div class="col-md-10">
+              <label>{{category.name}}</label>
+            </div>
+            <div class="col-md-2">
+              <a href="javascript:void(0)" class="pull-right delete-button" (click)="deleteCategory(category.id)"><i class="glyphicon glyphicon-remove-circle"></i></a>
             </div>
           </div>
           <div class="row">
             <div class="col-md-4">
-              <img src={{category.ImgUrl}}/>
+              <img src={{category.imgUrl}}/>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-6" *ngFor="let subcategory of category.subcategories">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <label>{{subcategory.name}}</label>
+                    </div>
+                    <div class="col-md-4">
+                      <a href="javascript:void(0)" class="delete-button" (click)="deleteSubcategory(subcategory.id)"><i class="glyphicon glyphicon-remove-circle"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -102,7 +119,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="subcategoryName">Назва підкатегорії</label>
-                      <input type="text" class="form-control" id="subcategoryName" name="subcategoryName" placeholder="підкатегорія" [(ngModel)]="subcategoryModel.Name">
+                      <input type="text" class="form-control" id="subcategoryName" name="subcategoryName" placeholder="підкатегорія" [(ngModel)]="subcategoryModel.name">
                     </div>
                   </div>
                 </div>
@@ -110,8 +127,8 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="categoryDropDown">Категорія</label>
-                      <select class="form-control" id="categoryDropDown" name="categoryDropDown" [(ngModel)]="subcategoryModel.CategoryId">
-                        <option *ngFor="let category of categories" [ngValue]="category.Id">{{category.Name}}</option>
+                      <select class="form-control" id="categoryDropDown" name="categoryDropDown" [(ngModel)]="subcategoryModel.categoryId">
+                        <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
                       </select>
                     </div>
                   </div>

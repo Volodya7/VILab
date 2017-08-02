@@ -36,4 +36,11 @@ export class CategoryService {
 
     return returnPromise;
   }
+  deleteCategory(id: number) {
+    return this.restService.DELETE(this.baseCategoryUrl, id);
+  }
+
+  deleteSubcategory(id: number) {
+    return this.restService.DELETE(this.baseSubcategoryUrl, id);
+  }
 }

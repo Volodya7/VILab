@@ -72,6 +72,17 @@ export class RestService {
     return this.request(requestoptions);
   }
 
+  DELETE(url: string, id: number) {
+    var headers = this.populateHeaders();
+    var requestoptions = new RequestOptions({
+      method: RequestMethod.Delete,
+      url: this.baseUrl + url + "/" + id,
+      headers: headers
+    });
+
+    return this.request(requestoptions);
+  }
+
 
   //Helpers
 
@@ -101,7 +112,6 @@ export class RestService {
     return this.http.request(new Request(requestoptions))
       .map(this.extractData);
   }
-
   extractData(res: Response) {
     return { status: res.status, json: res.text() ? res.json() : {} };
   }

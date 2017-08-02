@@ -9,7 +9,10 @@ namespace DbModel.Repositories
   {
     void AddCategory(Category category);
     IEnumerable<Category> GetCategories();
+    void DeleteCategory(int id);
+
     void AddSubcategory(Subcategory subcategory);
+    void DeleteSubcategory(int id);
     bool Save();
   }
 }

@@ -64,5 +64,21 @@ namespace VILab.API.Controllers
 
       return Ok();
     }
+
+    [HttpDelete("{categoryId}")]
+    public IActionResult DeleteCategory(int categoryId)
+    {
+      if (categoryId > 0)
+      {
+        _viLabRepository.DeleteCategory(categoryId);
+        if (!_viLabRepository.Save())
+        {
+          return BadRequest();
+        }
+        return Ok();
+      }
+
+      return BadRequest();
+    }
   }
 }
