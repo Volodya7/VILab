@@ -16,5 +16,6 @@ namespace DbModel
 
     public DbSet<Category> Categories { get; set; }
     public DbSet<Subcategory> Subcategories { get; set; }
+    public DbSet<Case> Cases { get; set; }
   }
 }

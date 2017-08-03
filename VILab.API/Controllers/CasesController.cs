@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Amazon.S3;
+using DbModel.Entities;
+using DbModel.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
@@ -16,24 +18,24 @@ using VILab.API.Services.S3Service;
 
 namespace VILab.API.Controllers
 {
-    [Authorize(Policy = "SuperUsers")]
-    [EnableCors("SiteCorsPolicy")]
-    [Route("api/cases")]
-    public class CasesController : Controller
+  [Authorize(Policy = "SuperUsers")]
+  [EnableCors("SiteCorsPolicy")]
+  [Route("api/cases")]
+  public class CasesController : Controller
+  {
+    private IS3Service _s3Service;
+    private IVILabRepository _vilabRepository;
+
+    public CasesController(IS3Service s3Service, IVILabRepository viLabRepository)
     {
-        private IHostingEnvironment _env;
-        private IS3Service _s3Service;
+      _s3Service = s3Service;
+      _vilabRepository = viLabRepository;
+    }
 
-        public CasesController(IHostingEnvironment env, IS3Service s3Service)
-        {
-            _env = env;
-            _s3Service = s3Service;
-        }
-
-        [HttpGet]
-        public IActionResult GetCases()
-        {
-            var testCases=new List<CaseDto>
+    [HttpGet]
+    public IActionResult GetCases()
+    {
+      var testCases = new List<CaseDto>
             {
                 new CaseDto
                 {
@@ -60,19 +62,31 @@ namespace VILab.API.Controllers
                     ImgUrl = "www.firstcase.com"
                 }
             };
-            return Ok(testCases);
-        }
-
-        [HttpPost]
-        public IActionResult CreateCase(CaseForCreationDto caseForCreationDto)
-        {
-            var files = Request.Form.Files;
-            foreach (var file in files)
-            {
-                var response = _s3Service.UploadFile(file);
-            }
-
-            return Ok();
-        }
+      return Ok(testCases);
     }
+
+    [HttpPost]
+    public IActionResult CreateCase(CaseForCreationDto caseForCreationDto)
+    {
+      if (!ModelState.IsValid || caseForCreationDto == null)
+      {
+        return BadRequest(ModelState);
+      }
+
+      caseForCreationDto.BeforeImgUrl = caseForCreationDto.BeforeImage != null ? _s3Service.UploadFile(caseForCreationDto.BeforeImage) : string.Empty;
+      caseForCreationDto.AfterImgUrl = caseForCreationDto.AfterImage != null ? _s3Service.UploadFile(caseForCreationDto.AfterImage) : string.Empty;
+
+      var caseToSave = new Case();
+      AutoMapper.Mapper.Map(caseForCreationDto, caseToSave);
+
+      _vilabRepository.AddCase(caseToSave);
+
+      if (!_vilabRepository.Save())
+      {
+        return BadRequest($"Failed to create case {caseForCreationDto.Name}");
+      }
+
+      return Ok();
+    }
+  }
 }

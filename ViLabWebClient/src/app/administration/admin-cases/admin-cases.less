@@ -1,6 +1,67 @@
-﻿.form-caption {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: @caption-text-font-size;
-  font-weight: bold;
+﻿.case-container {
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+
+  label {
+    color: @admin-nav-bgcolor;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  a {
+    vertical-align: middle;
+    font-size: 30px;
+  }
+
+  .add-button {
+    font-size: 30px;
+    color: red;
+    margin-left: 5px;
+  }
+}
+
+.edit-case-container {
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+  transition: height 1s;
+
+  label {
+    color: @admin-nav-bgcolor;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  a {
+    vertical-align: middle;
+    font-size: 30px;
+  }
+
+  .add-button {
+    font-size: 30px;
+    color: red;
+    margin-left: 5px;
+  }
+
+  .container-header {
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .submit-section {
+    margin-top: 30px;
+  }
+}
+
+.no-resize {
+  resize: none;
 }

@@ -8,9 +8,10 @@ using DbModel;
 namespace DbModel.Migrations
 {
     [DbContext(typeof(ViLabContext))]
-    partial class CityInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20170803105318_AddedCasesTable")]
+    partial class AddedCasesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -92,9 +93,11 @@ namespace DbModel.Migrations
 
                     b.Property<string>("Subname");
 
+                    b.Property<int?>("UnitId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SubcategoryId");
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Cases");
                 });
@@ -249,8 +252,7 @@ namespace DbModel.Migrations
                 {
                     b.HasOne("DbModel.Entities.Subcategory", "Subcategory")
                         .WithMany("Cases")
-                        .HasForeignKey("SubcategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UnitId");
                 });
 
             modelBuilder.Entity("DbModel.Entities.Subcategory", b =>

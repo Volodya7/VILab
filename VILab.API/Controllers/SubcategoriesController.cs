@@ -24,6 +24,17 @@ namespace VILab.API.Controllers
       _vilabRepository = viLabRepository;
     }
 
+    [HttpGet("{categoryId}")]
+    public IActionResult GetSubcategories(int categoryId)
+    {
+      if (categoryId < 0)
+      {
+        return BadRequest();
+      }
+
+      return Ok(_vilabRepository.GetSubcategories(categoryId));
+    }
+
     [HttpPost]
     public IActionResult CreateSubcategory([FromBody]SubcategoryForCreationDto subcategory)
     {
@@ -32,7 +43,7 @@ namespace VILab.API.Controllers
         return BadRequest(ModelState);
       }
 
-      var subcategoryToSave=new Subcategory();
+      var subcategoryToSave = new Subcategory();
       AutoMapper.Mapper.Map(subcategory, subcategoryToSave);
 
       _vilabRepository.AddSubcategory(subcategoryToSave);

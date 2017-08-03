@@ -31,11 +31,11 @@ export class RestService {
 
     var headers = new Headers(), authtoken = this.getAuthToken();
     let formData: FormData = new FormData();
-    formData.append('Image', file, file.name);
-    // For multiple files
-    //for (let i = 0; i < files.length; i++) {
-    //    formData.append(`Files`, files[i], files[i].name);
-    //}
+    //formData.append('Image', file, file.name);
+    //// For multiple files
+    ////for (let i = 0; i < files.length; i++) {
+    ////    formData.append(`Files`, files[i], files[i].name);
+    ////}
 
     if (authtoken) {
       headers.append("Authorization", 'Bearer ' + authtoken.token);
@@ -43,10 +43,8 @@ export class RestService {
 
     if (postData !== "" && postData !== undefined && postData !== null) {
       for (var property in postData) {
-        if (property !== "Image") {
-          if (postData.hasOwnProperty(property)) {
-            formData.append(property, postData[property]);
-          }
+        if (postData.hasOwnProperty(property)) {
+          formData.append(property, postData[property]);
         }
       }
     }

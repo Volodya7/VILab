@@ -13,6 +13,10 @@ namespace DbModel.Repositories
 
     void AddSubcategory(Subcategory subcategory);
     void DeleteSubcategory(int id);
+    IEnumerable<Subcategory> GetSubcategories(int categoryId);
+
+    void AddCase(Case caseModel);
+
     bool Save();
   }
 }

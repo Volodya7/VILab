@@ -13,7 +13,7 @@ export class Category {
     this.description = model == null ? "" : model.description;
     this.imgUrl = model == null ? "" : model.imgUrl;
 
-    if (this.imgUrl != null) {
+    if (this.imgUrl != null && imgSize != null) {
       this.imgUrl = this.imgUrl.replace("size", imgSize + "x" + imgSize);
     }
 

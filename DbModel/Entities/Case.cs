@@ -6,25 +6,29 @@ using System.Text;
 
 namespace DbModel.Entities
 {
-    public class Case
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+  public class Case
+  {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+    [Required]
+    public string Name { get; set; }
 
-        [Required]
-        public string ImgUrl { get; set; }
+    public string Subname { get; set; }
 
-        public string Description { get; set; }
+    public string Description { get; set; }
 
-        [ForeignKey("UnitId")]
-        public Subcategory Unit { get; set; }
+    public string BeforeImgUrl { get; set; }
 
-        public int UnitId { get; set; }
+    [Required]
+    public string AfterImgUrl { get; set; }
 
-        public ICollection<CaseImg> CaseImgs { get; set; } = new List<CaseImg>();
-    }
+    [ForeignKey("SubcategoryId")]
+    public Subcategory Subcategory { get; set; }
+
+    public int SubcategoryId { get; set; }
+
+    public int CategoryId { get; set; }
+  }
 }

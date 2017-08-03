@@ -50,6 +50,16 @@ namespace DbModel.Repositories
       }
     }
 
+    public IEnumerable<Subcategory> GetSubcategories(int categoryId)
+    {
+      return _context.Subcategories.Where(s => s.CategoryId == categoryId).ToList();
+    }
+
+    public void AddCase(Case caseModel)
+    {
+      _context.Cases.Add(caseModel);
+    }
+
     public bool Save()
     {
       return _context.SaveChanges() > 0;
